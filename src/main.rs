@@ -1,37 +1,12 @@
-use rand::Rng;
-use std::cmp::Ordering;
-use std::io;
+// This is the main center of my rust learning! ever since I learned about the modulation stuff in rust I
+// Put each "lesson" or seperate concept in seperate files. 
 
-const HELLO_WORLD: &str = "Hello world!";
+mod guessing; // My first rust program, the guessing game from THE BOOK but with colorful outputs
+
+mod common; // common programming concepts from other languages in rust 
+
 fn main() {
-    println!("{}", HELLO_WORLD);
-    println!("Guess the number!");
-    let secret_number = rand::thread_rng().gen_range(1..=100);
-    //  println!("the secret number is {}", secret_number);
-    loop {
-        println!("Please input your guess: ");
+     guessing::guessing();
 
-        let mut guess = String::new();
-
-        io::stdin()
-            .read_line(&mut guess)
-            .expect("Failed to read line");
-
-        let guess: u32 = match guess.trim().parse() {
-            Ok(num) => num,
-            Err(_) => continue,
-        };
-
-        println!("You guessed: {}", guess);
-
-        match guess.cmp(&secret_number) {
-            Ordering::Less => println!("Too low!"),
-            Ordering::Equal => {
-                println!("You Win!");
-                break;
-            }
-            Ordering::Greater => println!("Too big!"),
-        }
-    }
-  
+     // common::common();
 }
